@@ -4,8 +4,6 @@ import {
   Flex,
   HStack,
   Stack,
-  SystemProps,
-  VStack,
 } from "@chakra-ui/react";
 import { FC } from "react";
 
@@ -51,7 +49,7 @@ export const MarketInfoCard: FC<Props> = ({ children, ...rest }) => {
   return (
     <>
       <Flex
-        bg="#151515"
+        bg="#111"
         border="1px solid"
         borderColor="#222"
         borderRadius="1.25rem"
@@ -59,7 +57,6 @@ export const MarketInfoCard: FC<Props> = ({ children, ...rest }) => {
         padding={6}
         maxW="container.xl"
         position="relative"
-     
         w="100%"
         {...rest}
       >

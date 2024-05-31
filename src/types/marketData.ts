@@ -1,3 +1,7 @@
+import { FlexProps } from "@chakra-ui/react";
+import { chartData } from "./chartData";
+import { Chain } from "viem";
+
 export interface MarketData {
   id: string;
   symbol: string;
@@ -31,4 +35,20 @@ export interface Roi {
   times: number;
   currency: string;
   percentage: number;
+}
+
+export interface MarketContT {
+  marketData: MarketData[] | null;
+  btnPrice: MarketData[] | null;
+  chartData: chartData["prices"] | null;
+  currentChain: Chain[];
+  loading: boolean;
+}
+
+export interface MarketInfoT extends FlexProps {
+  icon: React.ReactElement;
+  title: string;
+  amount: string | number | null;
+  loading: boolean;
+  btnAmount?: number | null;
 }

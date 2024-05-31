@@ -1,5 +1,5 @@
 import { getColor } from "@/utils";
-import { Flex, FlexProps, Link } from "@chakra-ui/react";
+import { Flex, FlexProps, Link, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { AiFillLinkedin } from "react-icons/ai";
 import { DiGithubBadge } from "react-icons/di";
@@ -50,6 +50,13 @@ export const MySocials: FC<FlexProps> = ({ ...rest }) => {
       alignItems="center"
       {...rest}
     >
+      <Text
+        display={{ base: "none", md: "block" }}
+        fontSize="14px"
+        color="#C7C7C7"
+      >
+        Made with ♥️ by{" "}
+      </Text>
       {Object.values(socialsList).map((social) => {
         return (
           <Link

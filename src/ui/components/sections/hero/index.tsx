@@ -4,9 +4,15 @@ import { PageContainer } from "../../pageContainer";
 import { MarketContent } from "./marketContent";
 import { useMarketData } from "@/hooks/getMarketData";
 import { useCurrentChain } from "@/hooks/getCurrentChain";
+import { useGetChart } from "@/hooks/getChart";
 
 export const Hero: FC = () => {
   const { chainId, currentChain } = useCurrentChain();
+
+  const { chartData } = useGetChart({
+    chainNum: chainId,
+    timePeriod: "14",
+  });
 
   const { marketData, loading } = useMarketData({
     chainNum: chainId,
@@ -41,6 +47,7 @@ export const Hero: FC = () => {
             currentChain={currentChain}
             btnPrice={btnPrice}
             marketData={marketData}
+            chartData={chartData?.prices}
             loading={loading}
           />
         </PageContainer>

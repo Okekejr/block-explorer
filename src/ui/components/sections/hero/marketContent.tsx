@@ -1,4 +1,11 @@
-import { Center, Divider, Flex, Stack } from "@chakra-ui/react";
+import {
+  Center,
+  Divider,
+  Flex,
+  Skeleton,
+  SkeletonCircle,
+  Stack,
+} from "@chakra-ui/react";
 import { FaChartPie } from "react-icons/fa";
 import { HiCubeTransparent } from "react-icons/hi";
 import { TbWorld } from "react-icons/tb";
@@ -6,20 +13,14 @@ import { MarketInfo } from "./marketInfo";
 import { MarketInfoCard } from "../../pageContainer";
 import { FC } from "react";
 import { formattedAmount, formattedNum, networkImage } from "@/utils";
-import { MarketData } from "@/types/marketData";
-import { Chain } from "viem";
-
-interface MarketContT {
-  marketData: MarketData[] | null;
-  btnPrice: MarketData[] | null;
-  currentChain: Chain[];
-  loading: boolean;
-}
+import { MarketContT } from "@/types/marketData";
+import { PageChart } from "@/ui/core/chartComp";
 
 export const MarketContent: FC<MarketContT> = ({
   marketData,
   btnPrice,
   currentChain,
+  chartData,
   loading,
 }) => {
   return (
@@ -77,6 +78,41 @@ export const MarketContent: FC<MarketContT> = ({
               loading={loading}
             />
           </Flex>
+
+          <Center
+            display={{ base: "none", md: "block" }}
+            height="140px"
+            px="6px"
+          >
+            <Divider orientation="vertical" />
+          </Center>
+
+          <Divider
+            display={{ base: "block", md: "none" }}
+            orientation="horizontal"
+          />
+
+          {loading ? (
+            <Flex
+              flexDir="column"
+              gap={4}
+              width={{ base: "100%", md: "20rem" }}
+            >
+              <SkeletonCircle size="10" />
+
+              <Flex flexDir="column" gap={4}>
+                <Skeleton height="20px" width="100px" />
+                <Skeleton height="20px" width="100px" />
+              </Flex>
+            </Flex>
+          ) : (
+            <PageChart
+              chartName={currentChain[0].name}
+              chartTitle="HISTORICAL CHART DATA IN 14 DAYS"
+              _width={400}
+              data={chartData}
+            />
+          )}
         </Stack>
       </MarketInfoCard>
     </>
