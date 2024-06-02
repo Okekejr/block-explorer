@@ -79,6 +79,7 @@ export const Hero: FC = () => {
           />
         </PageContainer>
       </Box>
+      <Box height="15vh" maxH="260px" />
     </>
   );
 };

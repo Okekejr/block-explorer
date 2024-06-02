@@ -26,7 +26,11 @@ export const MarketContent: FC<MarketContT> = ({
   return (
     <>
       <InfoCard>
-        <Stack direction={{ base: "column", md: "row" }} spacing={8}>
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          width="100%"
+          spacing={8}
+        >
           <Flex flexDirection="column" gap={6}>
             <MarketInfo
               title={`${currentChain[0].name} PRICE`}
