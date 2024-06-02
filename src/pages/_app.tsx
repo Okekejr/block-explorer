@@ -4,6 +4,7 @@ import { Layout } from "@/ui/components/layout";
 import { wagmiConfig } from "@/utils/wagmi";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NextSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import { WagmiProvider } from "wagmi";
 
@@ -14,6 +15,11 @@ export default function App({ Component, pageProps }: AppProps) {
     <WagmiProvider config={wagmiConfig}>
       <QueryClientProvider client={queryClient}>
         <ChakraProvider theme={theme}>
+          <NextSeo
+            title="Blockchain explorer by Okeke Emmanuel."
+            titleTemplate="%s"
+            description="Block-explorer for both Ethereum and Polygon."
+          />
           <FontFaces />
           <Layout>
             <Component {...pageProps} />
