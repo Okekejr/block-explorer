@@ -78,8 +78,8 @@ export const Hero: FC = () => {
             currentChain={currentChain}
           />
         </PageContainer>
-        <Box height="15vh" maxH="260px" />
       </Box>
+      <Box height="15vh" maxH="260px" />
     </>
   );
 };
