@@ -43,8 +43,8 @@ export const Layout: FC<FlexProps> = ({ children, ...rest }) => {
       position="relative"
       {...rest}
     >
-      <TopNav />
       <Navbar isShrunk={isShrunk} />
+      <Box height="13vh" maxH="260px" />
       <Box flex={1}>{children}</Box>
     </Flex>
   );

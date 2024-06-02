@@ -10,7 +10,7 @@ import { FaChartPie } from "react-icons/fa";
 import { HiCubeTransparent } from "react-icons/hi";
 import { TbWorld } from "react-icons/tb";
 import { MarketInfo } from "./marketInfo";
-import { MarketInfoCard } from "../../pageContainer";
+import { InfoCard } from "../../pageContainer";
 import { FC } from "react";
 import { formattedAmount, formattedNum, networkImage } from "@/utils";
 import { MarketContT } from "@/types/marketData";
@@ -25,7 +25,7 @@ export const MarketContent: FC<MarketContT> = ({
 }) => {
   return (
     <>
-      <MarketInfoCard>
+      <InfoCard>
         <Stack direction={{ base: "column", md: "row" }} spacing={8}>
           <Flex flexDirection="column" gap={6}>
             <MarketInfo
@@ -114,7 +114,7 @@ export const MarketContent: FC<MarketContT> = ({
             />
           )}
         </Stack>
-      </MarketInfoCard>
+      </InfoCard>
     </>
   );
 };

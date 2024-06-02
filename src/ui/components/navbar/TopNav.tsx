@@ -14,6 +14,7 @@ export const TopNav: FC = () => {
         height="5vh"
         borderBottom="1px solid"
         borderColor="#222"
+        bg="#111"
         gap={4}
       >
         {/* <CurrentPrice /> */}

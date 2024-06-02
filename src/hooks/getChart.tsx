@@ -9,7 +9,7 @@ interface Props {
 
 export const useGetChart = ({ chainNum, timePeriod }: Props) => {
   const [chartData, setChartData] = useState<chartData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const url = useMemo(() => {

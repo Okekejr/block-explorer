@@ -9,11 +9,11 @@ import {
 import { FC } from "react";
 
 export const MarketInfo: FC<MarketInfoT> = ({
+  icon,
+  title,
   amount,
   btnAmount,
-  icon,
-  loading = true,
-  title,
+  loading,
   ...rest
 }) => {
   return (

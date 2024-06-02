@@ -16,5 +16,6 @@ export interface ChartProps extends HighchartsReact.Props {
   _width?: number | null;
   data?: chartData["prices"] | null;
   chartTitle?: string | null;
+  subTitle?: string | null;
   chartName?: string | null;
 }

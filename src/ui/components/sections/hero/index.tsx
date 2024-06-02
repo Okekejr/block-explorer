@@ -5,6 +5,9 @@ import { MarketContent } from "./marketContent";
 import { useMarketData } from "@/hooks/getMarketData";
 import { useCurrentChain } from "@/hooks/getCurrentChain";
 import { useGetChart } from "@/hooks/getChart";
+import { BlockInfo } from "../blockInfo";
+import { useBlock } from "wagmi";
+import { SearchBar } from "@/ui/core/searchBar";
 
 export const Hero: FC = () => {
   const { chainId, currentChain } = useCurrentChain();
@@ -24,6 +27,8 @@ export const Hero: FC = () => {
     currency: "btc",
   });
 
+  const { data, isLoading } = useBlock({ chainId: chainId });
+
   return (
     <>
       <Box
@@ -40,8 +45,10 @@ export const Hero: FC = () => {
 
         <PageContainer _spacing={8}>
           <Heading fontSize={{ base: "1.3rem", md: "x-large" }}>
-            {currentChain[0].name} Chain Explorer
+            {currentChain ? currentChain[0].name : ""} Chain Explorer
           </Heading>
+
+          <SearchBar />
 
           <MarketContent
             currentChain={currentChain}
@@ -49,6 +56,12 @@ export const Hero: FC = () => {
             marketData={marketData}
             chartData={chartData?.prices}
             loading={loading}
+          />
+
+          <BlockInfo
+            data={data}
+            isLoading={isLoading}
+            currentChain={currentChain}
           />
         </PageContainer>
       </Box>

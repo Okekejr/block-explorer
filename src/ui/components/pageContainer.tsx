@@ -1,10 +1,4 @@
-import {
-  Container,
-  ContainerProps,
-  Flex,
-  HStack,
-  Stack,
-} from "@chakra-ui/react";
+import { Container, ContainerProps, Flex, Stack } from "@chakra-ui/react";
 import { FC } from "react";
 
 interface Props extends ContainerProps {
@@ -45,7 +39,7 @@ export const StackItemContainer = ({ children }: PropsStack) => {
   return <Stack spacing="5px">{children}</Stack>;
 };
 
-export const MarketInfoCard: FC<Props> = ({ children, ...rest }) => {
+export const InfoCard: FC<Props> = ({ children, ...rest }) => {
   return (
     <>
       <Flex
@@ -60,7 +54,7 @@ export const MarketInfoCard: FC<Props> = ({ children, ...rest }) => {
         w="100%"
         {...rest}
       >
-        <HStack>{children}</HStack>
+        {children}
       </Flex>
     </>
   );

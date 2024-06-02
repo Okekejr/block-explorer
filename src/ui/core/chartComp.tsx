@@ -2,12 +2,14 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { useRef } from "react";
 import { ChartProps, SeriesData } from "@/types";
+import { getColor } from "@/utils";
 
 export const PageChart = ({
   chartName,
   chartTitle,
   _height,
   _width,
+  subTitle,
   data,
   ...rest
 }: ChartProps) => {
@@ -41,6 +43,16 @@ export const PageChart = ({
 
     title: {
       text: chartTitle || "",
+      align: "left",
+      style: {
+        color: "#fff",
+        fontSize: "12.8px",
+        fontFamily: "Circular Std Book",
+      },
+    },
+
+    subtitle: {
+      text: subTitle || "",
       align: "left",
       style: {
         color: "#fff",
