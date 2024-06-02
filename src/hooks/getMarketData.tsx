@@ -19,33 +19,33 @@ export const useMarketData = ({ chainNum, currency }: Props) => {
   }, [chainNum, currency]);
 
   const fetchMarketData = useCallback(async () => {
-    // setLoading(true);
-    // setError(null);
+    setLoading(true);
+    setError(null);
 
-    // try {
-    //   const response = await fetch(url, {
-    //     method: "GET",
-    //     headers: {
-    //       accept: "application/json",
-    //       "x-cg-demo-api-key": process.env.NEXT_PUBLIC_COINGECKO_KEY || "",
-    //     },
-    //   });
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "x-cg-demo-api-key": process.env.NEXT_PUBLIC_COINGECKO_KEY || "",
+        },
+      });
 
-    //   if (!response.ok) {
-    //     throw new Error(`Error: ${response.statusText}`);
-    //   }
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
 
-    //   const parsing = await response.json();
-    //   setMarketData(parsing);
-    // } catch (error: unknown) {
-    //   if (error instanceof Error) {
-    //     setError(error.message);
-    //   } else {
-    //     setError("An unknown error occurred");
-    //   }
-    // } finally {
-    //   setLoading(false);
-    // }
+      const parsing = await response.json();
+      setMarketData(parsing);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
   }, [url]);
 
   useEffect(() => {

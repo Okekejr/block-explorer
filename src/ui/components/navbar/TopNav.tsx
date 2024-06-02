@@ -17,7 +17,7 @@ export const TopNav: FC = () => {
         bg="#111"
         gap={4}
       >
-        {/* <CurrentPrice /> */}
+        <CurrentPrice />
         <MySocials />
       </Flex>
     </>

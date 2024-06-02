@@ -9,8 +9,6 @@ import {
   getBalance,
   getBlock,
   getTransaction,
-  getTransactionCount,
-  readContract,
 } from "wagmi/actions";
 
 export const useSearch = () => {
@@ -18,7 +16,6 @@ export const useSearch = () => {
   const [transactInfo, setTransactInfo] =
     useState<GetTransactionReturnType | null>();
   const [balance, setBalance] = useState<GetBalanceReturnType | null>();
-  const [transCount, setTransCount] = useState<number | null>();
   const [query, setQuery] = useState<string | null>(null);
   const [tokenInfo, setTokenInfo] = useState<ReadContractReturnType | null>();
   const [loading, setLoading] = useState(false);
@@ -76,12 +73,6 @@ export const useSearch = () => {
       });
 
       setBalance(balance);
-
-      const transactionCount = await getTransactionCount(wagmiConfig, {
-        address: address,
-      });
-
-      setTransCount(transactionCount);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -93,95 +84,60 @@ export const useSearch = () => {
     }
   }, []);
 
-  const getTokenInfo = useCallback(async (addie: Address) => {
-    setLoading(true);
-    setError(null);
+  const handleSearch = useCallback(
+    async (query: string) => {
+      setLoading(true);
+      setError(null);
+      setBlockInfo(null);
+      setTransactInfo(null);
+      setBalance(null);
+      setTokenInfo(null);
 
-    try {
-      const [name, symbol, totalSupply] = await Promise.all([
-        readContract(wagmiConfig, {
-          functionName: "name",
-          abi: [
-            "function name() view returns (string)",
-            "function symbol() view returns (string)",
-            "function totalSupply() view returns (uint256)",
-          ],
-          address: addie,
-        }),
-        readContract(wagmiConfig, {
-          functionName: "symbol",
-          abi: [
-            "function name() view returns (string)",
-            "function symbol() view returns (string)",
-            "function totalSupply() view returns (uint256)",
-          ],
-          address: addie,
-        }),
-        readContract(wagmiConfig, {
-          functionName: "totalSupply",
-          abi: [
-            "function name() view returns (string)",
-            "function symbol() view returns (string)",
-            "function totalSupply() view returns (uint256)",
-          ],
-          address: addie,
-        }),
-      ]);
+      try {
+        if (!query) {
+          throw new Error("Query is empty");
+        }
 
-      setTokenInfo({ name, symbol, totalSupply });
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("An unknown error occurred");
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+        // Check if the query is a transaction hash
+        if (query.startsWith("0x") && query.length === 66) {
+          const txHash = query as Hash;
+          await getTransact(txHash);
+        }
 
-  const handleSearch = useCallback(async () => {
-    setLoading(true);
-    setError(null);
-    setBlockInfo(null);
-    setTransactInfo(null);
-    setBalance(null);
-    setTransCount(null);
-    setTokenInfo(null);
+        // Check if the query is an address transaction hash
+        else if (query.startsWith("0x") && query.length === 42) {
+          const address = query as Address;
+          await getAddressInfo(address);
+        }
 
-    try {
-      if (!query) {
-        throw new Error("Query is empty");
+        // Check if the query is an block number
+        else if (!isNaN(Number(query))) {
+          const blockNum = BigInt(query);
+          await getBlockInfo(blockNum);
+        } else {
+          throw new Error("Invalid query format");
+        }
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred");
+        }
+      } finally {
+        setLoading(false);
       }
+    },
+    [getBlockInfo, getTransact, getAddressInfo]
+  );
 
-      // Check if the query is a block number
-      if (!isNaN(Number(query))) {
-        const blockNum = BigInt(query);
-        await getBlockInfo(blockNum);
-      }
-      // Check if the query is a transaction hash
-      else if (query.startsWith("0x") && query.length === 66) {
-        const txHash = query as Hash;
-        await getTransact(txHash);
-      }
-      // Check if the query is an address
-      else if (query.startsWith("0x") && query.length === 42) {
-        const address = query as Address;
-        await getAddressInfo(address);
-        await getTokenInfo(address);
-      } else {
-        throw new Error("Invalid query format");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("An unknown error occurred");
-      }
-    } finally {
-      setLoading(false);
-    }
-  }, [query, getBlockInfo, getTransact, getAddressInfo, getTokenInfo]);
-
-  return { query, blockInfo, loading, handleSearch, setQuery };
+  return {
+    query,
+    blockInfo,
+    transactInfo,
+    balance,
+    loading,
+    tokenInfo,
+    handleSearch,
+    setQuery,
+  };
 };

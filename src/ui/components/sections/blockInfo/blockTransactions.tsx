@@ -1,17 +1,11 @@
 import { useTransact } from "@/hooks/getTransaction";
 import { FC } from "react";
-import { Chain } from "viem";
-import { UseBlockReturnType } from "wagmi";
 import { TransactionCard } from "./transactionCard";
 import { Skeleton, Stack } from "@chakra-ui/react";
 import { InfoCard } from "../../pageContainer";
+import { BlockTransT } from "@/types";
 
-interface Props {
-  data: UseBlockReturnType["data"];
-  currentChain: Chain[];
-}
-
-export const BlockTransactions: FC<Props> = ({ data, currentChain }) => {
+export const BlockTransactions: FC<BlockTransT> = ({ data, currentChain }) => {
   const { transItems, loading } = useTransact({ data: data });
 
   return (
@@ -39,7 +33,7 @@ export const BlockTransactions: FC<Props> = ({ data, currentChain }) => {
                   value={value}
                   addie={hash}
                   from={from}
-                  data={data}
+                  data={data?.number}
                   gas={gas}
                   to={to}
                 />

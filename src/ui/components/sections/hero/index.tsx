@@ -1,5 +1,5 @@
 import { Box, Heading } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { PageContainer } from "../../pageContainer";
 import { MarketContent } from "./marketContent";
 import { useMarketData } from "@/hooks/getMarketData";
@@ -29,6 +29,12 @@ export const Hero: FC = () => {
 
   const { data, isLoading } = useBlock({ chainId: chainId });
 
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
   return (
     <>
       <Box
@@ -44,9 +50,17 @@ export const Hero: FC = () => {
         </picture>
 
         <PageContainer _spacing={8}>
-          <Heading fontSize={{ base: "1.3rem", md: "x-large" }}>
-            {currentChain ? currentChain[0].name : ""} Chain Explorer
-          </Heading>
+          {isHydrated ? (
+            <Heading fontSize={{ base: "1.3rem", md: "x-large" }}>
+              {currentChain.length > 0
+                ? `${currentChain[0].name} Chain Explorer`
+                : "Chain Explorer"}
+            </Heading>
+          ) : (
+            <Heading fontSize={{ base: "1.3rem", md: "x-large" }}>
+              Loading...
+            </Heading>
+          )}
 
           <SearchBar />
 

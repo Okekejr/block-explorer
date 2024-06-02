@@ -1,31 +1,12 @@
 import { BlockUrl, TruncateAddress, getColor } from "@/utils";
-import {
-  Box,
-  Flex,
-  HStack,
-  Link,
-  Stack,
-  StackProps,
-  Tag,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, Link, Stack, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { GiGasPump } from "react-icons/gi";
 import { TbReceipt } from "react-icons/tb";
-import { Chain, formatEther, formatGwei } from "viem";
+import { formatEther, formatGwei } from "viem";
 import { SubTransCard } from "./subTransCard";
-import { UseBlockReturnType } from "wagmi";
 import { BlockContent } from "./blockContent";
-
-interface TransactCardT extends StackProps {
-  currentChain: Chain[];
-  addie: string | undefined;
-  gas: bigint | undefined;
-  from: string | undefined;
-  to: string | null;
-  value: bigint | undefined;
-  data: UseBlockReturnType["data"];
-}
+import { TransactCardT } from "@/types";
 
 export const TransactionCard: FC<TransactCardT> = ({
   currentChain,
@@ -71,12 +52,12 @@ export const TransactionCard: FC<TransactCardT> = ({
             >
               <Text
                 display={{ base: "block", md: "none" }}
-                fontSize={{ base: "small", md: "1.2rem" }}
+                fontSize={{ base: "medium", md: "1.2rem" }}
               >
                 TX#
               </Text>
               <Text
-                fontSize={{ base: "small", md: "1.2rem" }}
+                fontSize={{ base: "medium", md: "1.2rem" }}
                 color={getColor({ chainId: id })}
               >
                 <Link
@@ -120,7 +101,7 @@ export const TransactionCard: FC<TransactCardT> = ({
 
           <BlockContent
             title="Block No:"
-            block={data && data.number}
+            block={data}
             currentChain={currentChain}
           />
 

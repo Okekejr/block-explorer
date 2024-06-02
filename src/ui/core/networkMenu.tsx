@@ -10,12 +10,12 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import { ChevronUp } from "../components/icons/ChevronUp";
 import { useSwitchChain } from "wagmi";
 import { fonts } from "@/theme/Fonts";
 import { FC } from "react";
 import { getColor, networkImage } from "@/utils";
 import { useCurrentChain } from "@/hooks/getCurrentChain";
+import { ChevronUp } from "../components/icons/ChevronUp";
 
 export const NetworkMenu: FC<MenuButtonProps> = ({ ...rest }) => {
   const { chainId, chains, currentChain } = useCurrentChain();

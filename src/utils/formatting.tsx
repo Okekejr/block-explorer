@@ -45,7 +45,7 @@ export const justSeconds = (timestamp: bigint | undefined) => {
 };
 
 interface BlockUrlT {
-  block?: bigint | undefined;
+  block?: bigint | undefined | null;
   addres?: string | undefined | null;
   url: string | undefined;
 }
@@ -56,4 +56,29 @@ export const BlockUrl = ({ block, url, addres }: BlockUrlT): string => {
   } else {
     return `${url}/address/${addres}`;
   }
+};
+
+export const GetSearchText = (query: string | string[] | undefined): string => {
+  if (Array.isArray(query)) {
+    query = query[0]; // Take the first element if it's an array
+  }
+
+  if (query === undefined) {
+    return "";
+  }
+
+  // Check if the query is a transaction hash
+  if (query.startsWith("0x") && query.length === 66) {
+    return "Tx Hash:";
+  }
+  // Check if the query is an address
+  else if (query.startsWith("0x") && query.length === 42) {
+    return "Address:";
+  }
+  // Check if the query is a block number
+  else if (!isNaN(Number(query))) {
+    return "Block:";
+  }
+
+  return "";
 };

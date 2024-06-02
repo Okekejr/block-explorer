@@ -19,30 +19,30 @@ export const useGetChart = ({ chainNum, timePeriod }: Props) => {
   }, [chainNum, timePeriod]);
 
   const fetchChartData = useCallback(async () => {
-    // setLoading(true);
-    // setError(null);
-    // try {
-    //   const response = await fetch(url, {
-    //     method: "GET",
-    //     headers: {
-    //       accept: "application/json",
-    //       "x-cg-demo-api-key": process.env.NEXT_PUBLIC_COINGECKO_KEY || "",
-    //     },
-    //   });
-    //   if (!response.ok) {
-    //     throw new Error(`Error: ${response.statusText}`);
-    //   }
-    //   const parsing = await response.json();
-    //   setChartData(parsing);
-    // } catch (error: unknown) {
-    //   if (error instanceof Error) {
-    //     setError(error.message);
-    //   } else {
-    //     setError("An unknown error occurred");
-    //   }
-    // } finally {
-    //   setLoading(false);
-    // }
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "x-cg-demo-api-key": process.env.NEXT_PUBLIC_COINGECKO_KEY || "",
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      const parsing = await response.json();
+      setChartData(parsing);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknown error occurred");
+      }
+    } finally {
+      setLoading(false);
+    }
   }, [url]);
 
   useEffect(() => {

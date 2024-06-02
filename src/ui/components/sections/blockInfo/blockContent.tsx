@@ -1,3 +1,4 @@
+import { BlockContT } from "@/types";
 import {
   BlockUrl,
   TimeAndDate,
@@ -5,19 +6,8 @@ import {
   formattedNum,
   getColor,
 } from "@/utils";
-import { Flex, FlexProps, Link, Text } from "@chakra-ui/react";
+import { Flex, Link, Text } from "@chakra-ui/react";
 import React, { FC } from "react";
-import { Chain } from "viem";
-
-interface BlockContT extends FlexProps {
-  currentChain: Chain[];
-  timeStamp?: bigint | undefined;
-  block?: bigint | undefined;
-  miner?: string | undefined;
-  gasUsed?: bigint | undefined;
-  icon?: React.ReactElement;
-  title: string;
-}
 
 export const BlockContent: FC<BlockContT> = ({
   icon,

@@ -2,7 +2,6 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
 import { useRef } from "react";
 import { ChartProps, SeriesData } from "@/types";
-import { getColor } from "@/utils";
 
 export const PageChart = ({
   chartName,

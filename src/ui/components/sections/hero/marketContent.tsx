@@ -13,8 +13,8 @@ import { MarketInfo } from "./marketInfo";
 import { InfoCard } from "../../pageContainer";
 import { FC } from "react";
 import { formattedAmount, formattedNum, networkImage } from "@/utils";
-import { MarketContT } from "@/types/marketData";
 import { PageChart } from "@/ui/core/chartComp";
+import { MarketContT } from "@/types";
 
 export const MarketContent: FC<MarketContT> = ({
   marketData,

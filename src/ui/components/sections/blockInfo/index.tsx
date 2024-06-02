@@ -1,19 +1,12 @@
 import { Divider, Flex, Heading, Skeleton, Stack } from "@chakra-ui/react";
 import { InfoCard } from "../../pageContainer";
-import { UseBlockReturnType } from "wagmi";
 import { FC } from "react";
-import { Chain } from "viem";
 import { RxCube } from "react-icons/rx";
 import { IoIosGitNetwork } from "react-icons/io";
 import { GiGasPump } from "react-icons/gi";
 import { BlockContent } from "./blockContent";
 import { BlockTransactions } from "./blockTransactions";
-
-interface BlockInfoT {
-  data: UseBlockReturnType["data"];
-  isLoading: boolean;
-  currentChain: Chain[];
-}
+import { BlockInfoT } from "@/types";
 
 export const BlockInfo: FC<BlockInfoT> = ({
   data,

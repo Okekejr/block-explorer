@@ -2,9 +2,8 @@ import { useCurrentChain } from "@/hooks/getCurrentChain";
 import { useMarketData } from "@/hooks/getMarketData";
 import { formattedAmount, getColor } from "@/utils";
 import { Flex, HStack, Skeleton, Text } from "@chakra-ui/react";
-import { FC } from "react";
 
-export const CurrentPrice: FC = () => {
+export const CurrentPrice = () => {
   const { chainId, currentChain } = useCurrentChain();
 
   const { marketData, error, loading } = useMarketData({

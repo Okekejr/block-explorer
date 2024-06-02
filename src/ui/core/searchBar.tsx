@@ -11,17 +11,16 @@ import {
   InputRightElement,
   Spinner,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 export const SearchBar = () => {
-  const { query, loading, blockInfo, handleSearch, setQuery } = useSearch();
-
+  const { query, loading, setQuery } = useSearch();
   const { chainId } = useCurrentChain();
-
-  console.log(blockInfo);
+  const router = useRouter();
 
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    handleSearch();
+    router.push(`/search?query=${query}`);
     setQuery(null);
   };
 
@@ -43,7 +42,7 @@ export const SearchBar = () => {
             </InputLeftElement>
             <Input
               type="text"
-              placeholder="Search by Address/ Txn Hash/ Block Number/ Token Address"
+              placeholder="Search by Address/ Txn Hash/ Block Number"
               _placeholder={{ color: "gray.400" }}
               value={query || ""}
               onChange={onChangehandler}
