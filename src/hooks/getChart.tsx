@@ -1,27 +1,26 @@
-import { MarketData } from "@/types/marketData";
+import { chartData } from "@/types/chartData";
 import { getNetworkID } from "@/utils";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 interface Props {
   chainNum: number;
-  currency: string;
+  timePeriod: string;
 }
 
-export const useMarketData = ({ chainNum, currency }: Props) => {
-  const [marketData, setMarketData] = useState<MarketData[] | null>(null);
-  const [loading, setLoading] = useState(true);
+export const useGetChart = ({ chainNum, timePeriod }: Props) => {
+  const [chartData, setChartData] = useState<chartData | null>(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const url = useMemo(() => {
-    return `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${getNetworkID(
+    return ` https://api.coingecko.com/api/v3/coins/${getNetworkID(
       chainNum
-    )}`;
-  }, [chainNum, currency]);
+    )}/market_chart?vs_currency=usd&days=${timePeriod}`;
+  }, [chainNum, timePeriod]);
 
-  const fetchMarketData = useCallback(async () => {
+  const fetchChartData = useCallback(async () => {
     setLoading(true);
     setError(null);
-
     try {
       const response = await fetch(url, {
         method: "GET",
@@ -30,13 +29,11 @@ export const useMarketData = ({ chainNum, currency }: Props) => {
           "x-cg-demo-api-key": process.env.NEXT_PUBLIC_COINGECKO_KEY || "",
         },
       });
-
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
-
       const parsing = await response.json();
-      setMarketData(parsing);
+      setChartData(parsing);
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message);
@@ -50,9 +47,9 @@ export const useMarketData = ({ chainNum, currency }: Props) => {
 
   useEffect(() => {
     if (chainNum) {
-      fetchMarketData();
+      fetchChartData();
     }
-  }, [chainNum, fetchMarketData]);
+  }, [chainNum, fetchChartData]);
 
-  return { marketData, loading, error, url };
+  return { chartData, loading, error };
 };

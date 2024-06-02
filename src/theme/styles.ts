@@ -5,7 +5,7 @@ export const styles = {
     },
     body: {
       overflowX: "hidden",
-      bg: "#151515",
+      bg: "#111",
       color: "#fff",
     },
 

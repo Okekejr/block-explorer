@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Flex, Box, FlexProps } from "@chakra-ui/react";
 import { Navbar } from "./navbar";
-import { TopNav } from "./navbar/TopNav";
 
 export const Layout: FC<FlexProps> = ({ children, ...rest }) => {
   const [isShrunk, setShrunk] = useState(false);
@@ -43,8 +42,8 @@ export const Layout: FC<FlexProps> = ({ children, ...rest }) => {
       position="relative"
       {...rest}
     >
-      <TopNav />
       <Navbar isShrunk={isShrunk} />
+      <Box height="13vh" maxH="260px" />
       <Box flex={1}>{children}</Box>
     </Flex>
   );

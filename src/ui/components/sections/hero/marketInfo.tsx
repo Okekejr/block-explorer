@@ -1,6 +1,6 @@
+import { MarketInfoT } from "@/types";
 import {
   Flex,
-  FlexProps,
   Skeleton,
   SkeletonCircle,
   Text,
@@ -8,20 +8,12 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 
-interface MarketInfoT extends FlexProps {
-  icon: React.ReactElement;
-  title: string;
-  amount: string | number | null;
-  loading: boolean;
-  btnAmount?: number | null;
-}
-
 export const MarketInfo: FC<MarketInfoT> = ({
+  icon,
+  title,
   amount,
   btnAmount,
-  icon,
-  loading = true,
-  title,
+  loading,
   ...rest
 }) => {
   return (
