@@ -27,7 +27,7 @@ export const MarketContent: FC<MarketContT> = ({
     <>
       <InfoCard>
         <Stack
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: "column", lg: "row" }}
           width="100%"
           spacing={8}
         >
@@ -53,7 +53,7 @@ export const MarketContent: FC<MarketContT> = ({
           </Flex>
 
           <Center
-            display={{ base: "none", md: "block" }}
+            display={{ base: "none", lg: "block" }}
             height="140px"
             px="6px"
           >
@@ -61,7 +61,7 @@ export const MarketContent: FC<MarketContT> = ({
           </Center>
 
           <Divider
-            display={{ base: "block", md: "none" }}
+            display={{ base: "block", lg: "none" }}
             orientation="horizontal"
           />
 
@@ -84,7 +84,7 @@ export const MarketContent: FC<MarketContT> = ({
           </Flex>
 
           <Center
-            display={{ base: "none", md: "block" }}
+            display={{ base: "none", lg: "block" }}
             height="140px"
             px="6px"
           >
@@ -92,7 +92,7 @@ export const MarketContent: FC<MarketContT> = ({
           </Center>
 
           <Divider
-            display={{ base: "block", md: "none" }}
+            display={{ base: "block", lg: "none" }}
             orientation="horizontal"
           />
 

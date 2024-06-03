@@ -29,7 +29,7 @@ export const MarketInfo: FC<MarketInfoT> = ({
         <Flex
           alignItems="center"
           gap={4}
-          width={{ base: "100%", md: "20rem" }}
+          width={{ base: "100%", lg: "20rem" }}
           {...rest}
         >
           <>{icon}</>
