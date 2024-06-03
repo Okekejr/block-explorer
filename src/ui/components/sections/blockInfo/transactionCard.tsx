@@ -23,14 +23,14 @@ export const TransactionCard: FC<TransactCardT> = ({
   return (
     <>
       <Stack
-        direction={{ base: "column", md: "row" }}
+        direction={{ base: "column", lg: "row" }}
         justifyContent="space-between"
         alignItems="center"
         width="100%"
         {...rest}
       >
         <Flex
-          alignItems={{ md: "center" }}
+          alignItems={{ lg: "center" }}
           justifyContent="space-between"
           direction={{ base: "column", md: "row" }}
           width={{ base: "100%", md: "auto" }}
